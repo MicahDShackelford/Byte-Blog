@@ -31,7 +31,11 @@ let seedDB = () => {
       title: faker.lorem.words(),
       author: faker.name.findName(),
       postedTime: faker.date.past(),
-      post: faker.lorem.paragraphs()
+      post: (faker.lorem.paragraphs() + "\n" +
+            faker.lorem.paragraphs() + "\n" +
+            faker.lorem.paragraphs() + "\n" +
+            faker.lorem.paragraphs() + "\n" +
+            faker.lorem.paragraphs() + "\n")
     });
     post.save();
   }
