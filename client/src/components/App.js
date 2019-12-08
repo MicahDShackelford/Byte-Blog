@@ -11,16 +11,26 @@ class App extends React.Component {
     super(props);
     this.state = ({
       view: 'PostsView',
-      posts: [{title: null, author: null, postedTime: {date: null, time: null},post: null}],
+      posts: [{title: null, author: null, postedTime: null,post: null}],
       currentPost: null
     });
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    this.setState({
-      posts: fakeData.reverse()
-    });
+    this.fetchPosts();
+  }
+
+  fetchPosts() {
+    fetch('http://127.0.0.1:3000/posts/retrieve')
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        this.setState({
+          posts: res.reverse()
+        })
+      })
   }
 
   handleClick(e) {
