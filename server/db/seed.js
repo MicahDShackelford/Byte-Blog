@@ -31,15 +31,43 @@ let seedDB = () => {
       title: faker.lorem.words(),
       author: faker.name.findName(),
       postedTime: faker.date.past(),
-      post: (faker.lorem.paragraphs() + "\n" +
-            faker.lorem.paragraphs() + "\n" +
-            faker.lorem.paragraphs() + "\n" +
-            faker.lorem.paragraphs() + "\n" +
-            faker.lorem.paragraphs() + "\n")
+      post: generateParagraph()
     });
     post.save();
   }
   console.log("[Seed] Your database has been seeded, [Ctrl+C] to close this script");
+}
+
+let generateParagraph = () => {
+  return (faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() + "\n" +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() + "\n" +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() + "\n" +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph() +
+  faker.lorem.paragraph());
 }
 
 Post

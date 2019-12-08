@@ -6,6 +6,8 @@ let PostView = (props) => {
   let post = props.post;
   let postTime = post.postedTime;
 
+  let formattedBody = post.post.split('\n');
+
   return (
     <div className="post-view">
       <div className="post-header">
@@ -15,7 +17,12 @@ let PostView = (props) => {
         <p>{moment(postTime).fromNow()}</p>
       </div>
       <div className="post-body">
-        <p>{post.post}</p>
+        {formattedBody.map((paragraph, i) => (
+          <div key={`${post.id}-block-${i}`}>
+            <p>{paragraph}</p>
+            <br />
+          </div>
+        ))}
       </div>
     </div>
   )
