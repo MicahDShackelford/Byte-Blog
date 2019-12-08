@@ -4,7 +4,7 @@ const postSchema = mongoose.Schema({
   id: Number,
   title: String,
   author: String,
-  postedTime: String,
+  postedTime: Date,
   post: String
 });
 
