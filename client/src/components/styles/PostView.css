@@ -1,0 +1,10 @@
+.post-view {
+  display: flex;
+  flex-direction: column;
+}
+.post-view .post-header {
+  padding: 1em;
+}
+.post-view .post-body {
+  padding: 0 2em;
+}
