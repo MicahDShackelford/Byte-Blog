@@ -7,8 +7,8 @@ let PostsView = (props) => {
   return (
     <div id="posts-view">
       <div className="container">
-        {(posts.reverse()).map((post) => (
-          <Post post={post} key={`post-${post.id}`}/>
+        {posts.map((post, i) => (
+          <Post handleClick={props.handleClick} post={post} key={`post-${post.id}`} i={i}/>
         ))}
       </div>
     </div>

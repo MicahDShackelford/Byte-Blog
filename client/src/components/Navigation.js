@@ -8,11 +8,8 @@ let Navigation = (props) => {
         <h1>Simple Blog</h1>
       </div>
       <div className="nav-links">
-        <div className="nav-item">
+        <div className="nav-item" id="nav-PostsView" onClick={props.handleClick}>
           <p>Home</p>
-        </div>
-        <div className="nav-item">
-          <p>Not Home</p>
         </div>
       </div>
     </div>
