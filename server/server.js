@@ -8,12 +8,15 @@ const TokenVerify = require('./auth/tokenVerification');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(express.static('./client/public'));
+
 app.use(express.json());
-app.use(express.urlencoded({extended:false}));
+app.use('/', express.urlencoded({extended:false}));
 
 app.get('/posts/retrieve', (req,res,next) => {
   Post
     .find({})
+    .sort({postedTime: 1})
     .then((response) => {
       res.send(response);
     });
