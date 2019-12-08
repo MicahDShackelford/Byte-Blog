@@ -1,6 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('./db/user');
+const Post = require('./db/post');
 const Database = require('./db/database');
 const TokenVerify = require('./auth/tokenVerification');
 
@@ -9,6 +10,14 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+
+app.get('/posts/retrieve', (req,res,next) => {
+  Post
+    .find({})
+    .then((response) => {
+      res.send(response);
+    });
+});
 
 app.post('/auth/login', (req,res,next) => {
   if(req.body.username === "micah" && req.body.password === "1234") {
