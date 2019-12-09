@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles/PostPreview.css';
+import './PostPreview.css';
 
 let PostPreview = (props) => {
   let formattedBody = props.post.body.split('\n');

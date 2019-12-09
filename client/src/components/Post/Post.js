@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import './styles/Post.css';
+import './Post.css';
 
 let Post = (props) => {
   let post = props.post;
