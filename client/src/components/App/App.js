@@ -1,11 +1,11 @@
 import React from 'react';
-import Navigation from './Navigation';
-import PostsView from './PostsView';
-import './styles/App.css';
+import Navigation from '../Navigation/Navigation';
+import PostsView from '../PostsView/PostsView';
+import './App.css';
 
-import fakeData from '../../fakedata';
-import PostView from './PostView';
-import CreatePost from './CreatePost';
+import fakeData from '../../../fakedata';
+import PostView from '../PostView/PostView';
+import CreatePost from '../CreatePost/CreatePost';
 
 class App extends React.Component {
   constructor(props) {

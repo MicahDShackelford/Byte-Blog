@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import PostPreview from './PostPreview';
-import './styles/CreatePost.css';
+import PostPreview from '../PostPreview/PostPreview';
+import './CreatePost.css';
 
 
 let CreatePost = () => {

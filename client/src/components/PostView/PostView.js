@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import './styles/PostView.css';
+import './PostView.css';
 
 let PostView = (props) => {
   let post = props.post;

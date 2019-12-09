@@ -1,6 +1,6 @@
 import React from 'react';
-import Post from './Post';
-import './styles/PostsView.css';
+import Post from '../Post/Post';
+import './PostsView.css';
 
 let PostsView = (props) => {
   let posts = props.posts;
