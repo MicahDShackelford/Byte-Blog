@@ -5,12 +5,13 @@ import './styles/App.css';
 
 import fakeData from '../../fakedata';
 import PostView from './PostView';
+import CreatePost from './CreatePost';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = ({
-      view: 'PostsView',
+      view: 'CreatePost',
       posts: [{title: null, author: null, postedTime: null,post: null}],
       currentPost: null
     });
@@ -49,17 +50,22 @@ class App extends React.Component {
   }
 
   render() {
-    if(this.state.view === 'PostsView') {
+    if (this.state.view === 'PostsView') {
       return(
         <div id="app">
           <Navigation handleClick={this.handleClick}/>
           <PostsView posts={this.state.posts} handleClick={this.handleClick}/>
         </div>
       )
-    }else if(this.state.view === 'PostView') {
+    } else if(this.state.view === 'PostView') {
       return <div id="app">
         <Navigation handleClick={this.handleClick}/>
         <PostView post={this.state.currentPost} />
+      </div>
+    } else if(this.state.view === 'CreatePost') {
+      return <div id="app">
+        <Navigation handleClick={this.handleClick}/>
+        <CreatePost />
       </div>
     }
   }
