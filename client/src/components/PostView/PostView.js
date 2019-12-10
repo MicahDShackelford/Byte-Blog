@@ -1,12 +1,26 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import moment from 'moment';
 import './PostView.css';
 
 let PostView = (props) => {
-  let post = props.post;
-  let postTime = post.postedTime;
+  const [post, setPost] = useState({title: "null", author: "null", postedTime: "null", post: "null"});
 
-  let formattedBody = post.post.split('\n');
+  useEffect(() => {
+    fetchPosts();
+  },[]);
+
+  const fetchPosts = () => {
+    fetch(`http://127.0.0.1:3000/post/retrieve/${props.match.params.postId}`)
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      setPost(res[0]);
+    })
+  }
+
+  let postTime = post.postedTime || null;
+  let formattedBody = post.post.split('\n') || [];
 
   return (
     <div className="post-view">

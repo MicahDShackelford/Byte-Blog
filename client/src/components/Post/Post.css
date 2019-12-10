@@ -12,3 +12,6 @@
 .blog-body {
   margin: 0.5em 2em
 }
+.blog-post a {
+  width: max-content;
+}
