@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import {Link} from 'react-router-dom';
 import './Post.css';
 
 let Post = (props) => {
@@ -15,6 +16,10 @@ let Post = (props) => {
     postTime = moment(postTime).fromNow();
   }
 
+  let handleClick = (e) => {
+    e.preventDefault();
+  }
+
   return (
     <div className="blog-post">
       <div className="blog-header">
@@ -25,7 +30,9 @@ let Post = (props) => {
       <div className="blog-body">
         <p>{postText}</p>
       </div>
-      <a href="#" id={`viewpost-${props.i}`} onClick={props.handleClick}>Continue Reading</a>
+      <Link to={`/post/${props.post.id}`}>
+        Continue Reading
+      </Link>
     </div>
   )
 }

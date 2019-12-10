@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import './Navigation.css';
 
 let Navigation = (props) => {
@@ -8,9 +9,11 @@ let Navigation = (props) => {
         <h1>Simple Blog</h1>
       </div>
       <div className="nav-links">
-        <div className="nav-item" id="nav-PostsView" onClick={props.handleClick}>
-          <p>Home</p>
-        </div>
+        <Link to='/'>
+          <div className="nav-item" id="nav-PostsView" onClick={props.handleClick}>
+            <p>Home</p>
+          </div>
+        </Link>
       </div>
     </div>
   )
