@@ -37,6 +37,8 @@
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.1",
     "faker": "^4.1.0",
+    "file-loader": "^5.0.2",
+    "image-webpack-loader": "^6.0.0",
     "nodemon": "^2.0.1",
     "path": "^0.12.7",
     "style-loader": "^1.0.1",
