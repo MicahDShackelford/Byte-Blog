@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static('./client/public'));
 
 app.use(express.json());
-app.use('/', express.urlencoded({extended:false}));
+app.use(express.urlencoded({extended:false}));
 
 app.get('/posts/retrieve', (req,res,next) => {
   Post
@@ -40,7 +40,13 @@ app.post('/auth/login', (req,res,next) => {
         res.send({
           ok: true,
           message: "Login success",
-          token
+          token,
+          user : {
+            loginStatus: true,
+            name: "Micah",
+            username: "micahdshackelford",
+            role:3
+          }
         });
       }
     })
@@ -52,13 +58,8 @@ app.post('/auth/login', (req,res,next) => {
   }
 });
 
-app.post('/auth/secure', TokenVerify, (req,res,next) => {
-  console.log("Logged in user");
 
-  next();
-});
-
-app.get('/post/create',(req,res,next) => {
+app.get('/create', (req,res,next) => {
   res.sendFile('index.html', {root: path.join('./client/public')})
 });
 
@@ -68,6 +69,15 @@ app.get('/post/:postId',(req,res,next) => {
 
 app.get('/auth/login',(req,res,next) => {
   res.sendFile('index.html', {root: path.join('./client/public')})
+});
+
+app.get('/auth/test',(req,res,next) => {
+  res.sendFile('index.html', {root: path.join('./client/public')})
+});
+
+app.post('/auth/tokenVerification', TokenVerify,(req,res,next) => {
+  console.log("Test")
+  res.end();
 });
 
 app.get('*',(req,res,next) => {

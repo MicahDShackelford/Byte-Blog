@@ -1,4 +1,4 @@
-// SEEDING SCRIPT FOR SIMPLE BLOG
+// SEEDING SCRIPT FOR Byte Blog
 // IMPORTANT INFOMATION
 // // This script requires faker
 // // This script will clear your posts Collection in your database
