@@ -21,7 +21,7 @@ class App extends React.Component {
         loginStatus: false,
         name: null,
         username: null,
-        role: 0 // 0 - Guest, 1 - Writer, 2- Moderator, 3 - Admin
+        role: 0 // 0 - Guest, 1 - Member, 2- Moderator, 3 - Admin
       }
     });
     this.fetchPosts = this.fetchPosts.bind(this);
