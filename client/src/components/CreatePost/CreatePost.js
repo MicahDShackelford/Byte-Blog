@@ -26,7 +26,7 @@ let CreatePost = () => {
             <label htmlFor="post-title">Title</label>
             <input type="text" id="post-title"></input>
           </div>
-          <div className="form-group">
+          <div className="form-group form-body">
             <label htmlFor="post-title">Body</label>
             <textarea id="post-body"></textarea>
           </div>
