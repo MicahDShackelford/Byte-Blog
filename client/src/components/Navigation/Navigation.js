@@ -1,10 +1,21 @@
-import React, {useState} from 'react';
+import React, {useEffect,useState} from 'react';
 import {Link} from 'react-router-dom';
 import './Navigation.css';
 import {IoMdArrowDropdown} from 'react-icons/io'
 
 let Navigation = (props) => {
   const [priv, setPriv] = useState(0);
+
+  let checkStatus = () => {
+    if(props.user.loginStatus) {
+      setPriv(props.user.role);
+    }
+  }
+
+  useEffect(() => {
+    console.log(props)
+    checkStatus();
+  },[props.user.loginStatus]);
 
   return (
     <div id="nav">
@@ -22,29 +33,29 @@ let Navigation = (props) => {
         </div>
       </div>
       {(priv > 2) ?
-      <div class="sub-nav">
-        <p class="drophvr">Hello, Admin</p>
-        <div class="dropdown-content">
+      <div className="sub-nav">
+        <p className="drophvr">Hello, Admin</p>
+        <div className="dropdown-content">
         </div>
       </div>
       :
       (priv > 1) ?
-      <div class="sub-nav">
-        <p class="drophvr">Hello, Moderator</p>
-        <div class="dropdown-content">
+      <div className="sub-nav">
+        <p className="drophvr">Hello, Moderator</p>
+        <div className="dropdown-content">
         </div>
       </div>
       :
       (priv > 0) ?
-      <div class="sub-nav">
-        <p class="drophvr">Hello, Member</p>
-        <div class="dropdown-content">
+      <div className="sub-nav">
+        <p className="drophvr">Hello, Member</p>
+        <div className="dropdown-content">
         </div>
       </div>
       :
-      <div class="sub-nav">
-      <p class="drophvr">Hello, Guest <IoMdArrowDropdown/></p>
-      <div class="dropdown-content">
+      <div className="sub-nav">
+      <p className="drophvr">Hello, Guest <IoMdArrowDropdown/></p>
+      <div className="dropdown-content">
         <p>Feel free to <Link to="/auth/login">login</Link> or <Link to="/auth/register">register</Link></p>
       </div>
     </div>

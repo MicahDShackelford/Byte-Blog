@@ -28,6 +28,7 @@ class App extends React.Component {
     this.setLogin = this.setLogin.bind(this);
   }
   componentDidMount() {
+    this.checkLogin();
     this.fetchPosts();
   }
 
@@ -36,6 +37,28 @@ class App extends React.Component {
       activeUser: user
     })
   }
+
+  checkLogin() {
+    let user = JSON.parse(localStorage.getItem("activeUser"));
+    if(user) {
+      fetch('/auth/tokenVerification', {
+        method: "POST",
+        headers: {
+          'Authorization': `Bearer ${user.token}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      }).then((res) => {
+        if(res.status === 200) {
+          this.setState({
+            activeUser: user.user
+          })
+        }
+      }).then(() => {
+        console.log(this.state.activeUser)
+      })
+  }
+}
 
   fetchPosts() {
     fetch('/posts/retrieve')
@@ -53,7 +76,7 @@ class App extends React.Component {
     return(
       <Router>
         <div id="app">
-          <Navigation />
+          <Navigation user={this.state.activeUser} />
             <Switch>
               <Route path="/" exact>
                 <PostsView posts={this.state.posts}/>
@@ -61,8 +84,12 @@ class App extends React.Component {
               {/* <Route path="/post/create">
                 <CreatePost />
               </Route> */}
-              <Route path="/post/:postId" exact render={(props) => <PostView fetchPosts={this.fetchPosts} posts={this.state.posts} {...props} />}/>
-              <Route path="/auth/login" component={Login}/>
+              <Route path="/post/:postId" exact render={(props) =>
+              <PostView fetchPosts={this.fetchPosts} posts={this.state.posts} {...props} />}/>
+
+              <Route path="/auth/login">
+                <Login setLogin={this.setLogin}/>
+              </Route>
 
               <ProtectedRoute path="/create" activeUser={this.state.activeUser} component={CreatePost}/>
             </Switch>
