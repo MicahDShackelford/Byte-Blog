@@ -4,16 +4,22 @@ import './Navigation.css';
 
 let Navigation = (props) => {
   return (
-    <div id="navigation">
-      <div className="nav-logo">
-        <h1>Simple Blog</h1>
+    <div id="nav">
+      <div id="navigation">
+        <div className="nav-logo">
+          <img src="../img/logo.png" style={{"maxWidth":"50px"}}></img>
+          <h1>Byte Blog</h1>
+        </div>
+        <div className="nav-links">
+          <Link to='/'>
+            <div className="nav-item" id="nav-PostsView" onClick={props.handleClick}>
+              <p>Home</p>
+            </div>
+          </Link>
+        </div>
       </div>
-      <div className="nav-links">
-        <Link to='/'>
-          <div className="nav-item" id="nav-PostsView" onClick={props.handleClick}>
-            <p>Home</p>
-          </div>
-        </Link>
+      <div id="sub-nav">
+
       </div>
     </div>
   )

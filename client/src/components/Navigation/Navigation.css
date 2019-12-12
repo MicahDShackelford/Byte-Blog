@@ -3,11 +3,16 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  background: #546e7a;
+  background:#3A6572;
   color: #fff;
 }
 .nav-logo {
   margin-left: 1em;
+  display: flex;
+  align-items: center;
+}
+.nav-logo img{
+  margin-right: 0.5em;
 }
 .nav-links {
   display: flex;
