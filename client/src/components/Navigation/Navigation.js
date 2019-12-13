@@ -27,11 +27,13 @@ let Navigation = (props) => {
               <p>HOME</p>
             </div>
           </Link>
-          <Link to='/create/'>
-            <div className="nav-item" id="nav-PostsView" onClick={props.handleClick}>
-              <p>NEW POST</p>
-            </div>
-          </Link>
+          {(props.user.role >= 2) && (
+            <Link to='/create/'>
+              <div className="nav-item" id="nav-PostsView" onClick={props.handleClick}>
+                <p>NEW POST</p>
+              </div>
+            </Link>
+          )}
           <Link to='/'>
             <div className="nav-item" id="nav-PostsView" onClick={props.handleClick}>
               <p>ABOUT</p>

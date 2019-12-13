@@ -15,7 +15,7 @@ class App extends React.Component {
     super(props);
     this.state = ({
       view: 'CreatePost',
-      posts: [{title: null, author: null, postedTime: null,post: null}],
+      posts: [{title: null, author: {name:null,avatar:null}, postedTime: null,post: null,comments:{count:null,commentsData:[]}}],
       currentPost: null,
       activeUser: {
         loginStatus: false,
@@ -96,7 +96,6 @@ class App extends React.Component {
                 <PostsView posts={this.state.posts}/>
               </Route>
               <Route path="/post/:postId" exact render={(props) => <PostView fetchPosts={this.fetchPosts} posts={this.state.posts} {...props} />}/>
-              <Route path="/auth/login" component={Login}/>
               <Route path="/post/:postId" exact render={(props) =>
               <PostView fetchPosts={this.fetchPosts} posts={this.state.posts} {...props} />}/>
               <Route path="/auth/login">
