@@ -29,13 +29,35 @@ let seedDB = () => {
     let post = new Post({
       id: i,
       title: faker.lorem.words(),
-      author: faker.name.findName(),
+      author: {
+        name: faker.internet.userName(),
+        avatar: faker.internet.avatar()
+      },
       postedTime: faker.date.past(),
-      post: generateParagraph()
+      post: generateParagraph(),
+      likes: faker.random.number(),
+      comments: generateComments()
     });
     post.save();
   }
   console.log("[Seed] Your database has been seeded, [Ctrl+C] to close this script");
+}
+
+let generateComments = () => {
+  let numComments = Math.floor(Math.random()* (25 - 1) + 1);
+  let commentArr = [];
+  for(var i = 0; i < numComments; i++) {
+    let comment = {
+      user: faker.internet.userName(),
+      text: faker.lorem.paragraph()
+    }
+    commentArr.push(comment);
+  }
+  let object = {
+    count: numComments,
+    commentsData: commentArr
+  };
+  return object;
 }
 
 let generateParagraph = () => {
