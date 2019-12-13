@@ -57,3 +57,23 @@
 #login-form button:hover {
   background: #3f723a;
 }
+#login-form button:disabled{
+  background: #3f723a;
+}
+#login #error-popup {
+  position:absolute;
+  visibility: hidden;
+  bottom: 0;
+  display:flex;
+  background: rgb(221, 0, 0);
+  border: 1px solid rgb(139, 0, 0);
+  color: #fff;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+  transform-origin: left bottom;
+  transform: scaleY(0);
+}
