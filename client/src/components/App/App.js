@@ -1,7 +1,7 @@
 import React from 'react';
 import Navigation from '../Navigation/Navigation';
 import PostsView from '../PostsView/PostsView';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import './App.css';
 import ProtectedRoute from '../Auth/ProtectedRoute';
 
@@ -26,6 +26,7 @@ class App extends React.Component {
     });
     this.fetchPosts = this.fetchPosts.bind(this);
     this.setLogin = this.setLogin.bind(this);
+    this.logout = this.logout.bind(this);
   }
   componentDidMount() {
     this.fetchPosts();
@@ -37,6 +38,43 @@ class App extends React.Component {
     })
   }
 
+<<<<<<< Updated upstream
+=======
+  logout(e) {
+    e.preventDefault();
+    localStorage.removeItem('activeUser');
+    this.setState({
+      activeUser: {
+        loginStatus: false,
+        name: null,
+        username: null,
+        role: 0
+      }
+    });
+    window.location.href = "/";
+  }
+
+  checkLogin() {
+    let user = JSON.parse(localStorage.getItem("activeUser"));
+    if(user) {
+      fetch('/auth/tokenVerification', {
+        method: "POST",
+        headers: {
+          'Authorization': `Bearer ${user.token}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      }).then((res) => {
+        if(res.status === 200) {
+          this.setState({
+            activeUser: user.user
+          })
+        }
+      });
+  }
+}
+
+>>>>>>> Stashed changes
   fetchPosts() {
     fetch('/posts/retrieve')
       .then((res) => {
@@ -53,16 +91,29 @@ class App extends React.Component {
     return(
       <Router>
         <div id="app">
+<<<<<<< Updated upstream
           <Navigation />
+=======
+          <Navigation user={this.state.activeUser} logout={this.logout}/>
+>>>>>>> Stashed changes
             <Switch>
               <Route path="/" exact>
                 <PostsView posts={this.state.posts}/>
               </Route>
+<<<<<<< Updated upstream
               {/* <Route path="/post/create">
                 <CreatePost />
               </Route> */}
               <Route path="/post/:postId" exact render={(props) => <PostView fetchPosts={this.fetchPosts} posts={this.state.posts} {...props} />}/>
               <Route path="/auth/login" component={Login}/>
+=======
+              <Route path="/post/:postId" exact render={(props) =>
+              <PostView fetchPosts={this.fetchPosts} posts={this.state.posts} {...props} />}/>
+
+              <Route path="/auth/login">
+                <Login setLogin={this.setLogin}/>
+              </Route>
+>>>>>>> Stashed changes
 
               <ProtectedRoute path="/create" activeUser={this.state.activeUser} component={CreatePost}/>
             </Switch>
