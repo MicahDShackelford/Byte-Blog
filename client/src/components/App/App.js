@@ -21,7 +21,7 @@ class App extends React.Component {
         loginStatus: false,
         name: null,
         username: null,
-        role: 0 // 0 - Guest, 1 - Writer, 2- Moderator, 3 - Admin
+        role: 0 // 0 - Guest, 1 - Member, 2- Moderator, 3 - Admin
       }
     });
     this.fetchPosts = this.fetchPosts.bind(this);
@@ -29,6 +29,7 @@ class App extends React.Component {
     this.logout = this.logout.bind(this);
   }
   componentDidMount() {
+    this.checkLogin();
     this.fetchPosts();
   }
 
@@ -37,9 +38,6 @@ class App extends React.Component {
       activeUser: user
     })
   }
-
-<<<<<<< Updated upstream
-=======
   logout(e) {
     e.preventDefault();
     localStorage.removeItem('activeUser');
@@ -53,6 +51,7 @@ class App extends React.Component {
     });
     window.location.href = "/";
   }
+
 
   checkLogin() {
     let user = JSON.parse(localStorage.getItem("activeUser"));
@@ -70,11 +69,11 @@ class App extends React.Component {
             activeUser: user.user
           })
         }
-      });
+      }).then(() => {
+        console.log(this.state.activeUser)
+      })
   }
 }
-
->>>>>>> Stashed changes
   fetchPosts() {
     fetch('/posts/retrieve')
       .then((res) => {
@@ -91,30 +90,18 @@ class App extends React.Component {
     return(
       <Router>
         <div id="app">
-<<<<<<< Updated upstream
-          <Navigation />
-=======
           <Navigation user={this.state.activeUser} logout={this.logout}/>
->>>>>>> Stashed changes
             <Switch>
               <Route path="/" exact>
                 <PostsView posts={this.state.posts}/>
               </Route>
-<<<<<<< Updated upstream
-              {/* <Route path="/post/create">
-                <CreatePost />
-              </Route> */}
               <Route path="/post/:postId" exact render={(props) => <PostView fetchPosts={this.fetchPosts} posts={this.state.posts} {...props} />}/>
               <Route path="/auth/login" component={Login}/>
-=======
               <Route path="/post/:postId" exact render={(props) =>
               <PostView fetchPosts={this.fetchPosts} posts={this.state.posts} {...props} />}/>
-
               <Route path="/auth/login">
                 <Login setLogin={this.setLogin}/>
               </Route>
->>>>>>> Stashed changes
-
               <ProtectedRoute path="/create" activeUser={this.state.activeUser} component={CreatePost}/>
             </Switch>
         </div>

@@ -25,6 +25,7 @@ let Login = (props) => {
       return res.json();
     }).then((res) => {
       if(res.ok === true) {
+        props.setLogin(res.user);
         localStorage.setItem("activeUser", JSON.stringify(res));
         setLoginStatus(true);
       }
