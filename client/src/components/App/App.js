@@ -1,7 +1,7 @@
 import React from 'react';
 import Navigation from '../Navigation/Navigation';
 import PostsView from '../PostsView/PostsView';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import './App.css';
 import ProtectedRoute from '../Auth/ProtectedRoute';
 
@@ -26,6 +26,7 @@ class App extends React.Component {
     });
     this.fetchPosts = this.fetchPosts.bind(this);
     this.setLogin = this.setLogin.bind(this);
+    this.logout = this.logout.bind(this);
   }
   componentDidMount() {
     this.checkLogin();
@@ -37,6 +38,20 @@ class App extends React.Component {
       activeUser: user
     })
   }
+  logout(e) {
+    e.preventDefault();
+    localStorage.removeItem('activeUser');
+    this.setState({
+      activeUser: {
+        loginStatus: false,
+        name: null,
+        username: null,
+        role: 0
+      }
+    });
+    window.location.href = "/";
+  }
+
 
   checkLogin() {
     let user = JSON.parse(localStorage.getItem("activeUser"));
@@ -59,7 +74,6 @@ class App extends React.Component {
       })
   }
 }
-
   fetchPosts() {
     fetch('/posts/retrieve')
       .then((res) => {
@@ -76,21 +90,18 @@ class App extends React.Component {
     return(
       <Router>
         <div id="app">
-          <Navigation user={this.state.activeUser} />
+          <Navigation user={this.state.activeUser} logout={this.logout}/>
             <Switch>
               <Route path="/" exact>
                 <PostsView posts={this.state.posts}/>
               </Route>
-              {/* <Route path="/post/create">
-                <CreatePost />
-              </Route> */}
+              <Route path="/post/:postId" exact render={(props) => <PostView fetchPosts={this.fetchPosts} posts={this.state.posts} {...props} />}/>
+              <Route path="/auth/login" component={Login}/>
               <Route path="/post/:postId" exact render={(props) =>
               <PostView fetchPosts={this.fetchPosts} posts={this.state.posts} {...props} />}/>
-
               <Route path="/auth/login">
                 <Login setLogin={this.setLogin}/>
               </Route>
-
               <ProtectedRoute path="/create" activeUser={this.state.activeUser} component={CreatePost}/>
             </Switch>
         </div>
