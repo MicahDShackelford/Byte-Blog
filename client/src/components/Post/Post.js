@@ -31,12 +31,12 @@ let Post = (props) => {
         </div>
         <div className="vert-divider">&nbsp;</div>
         <div className="blog-head-right">
-          <div class="float-left">
+          <div className="float-left">
             <p>By: {post.author.name}</p>
             <p>{postTime}</p>
           </div>
           <div className="float-right">
-            <img classname="user-avatar" src={post.author.avatar}></img>
+            <img className="user-avatar" src={post.author.avatar}></img>
           </div>
         </div>
       </div>
@@ -50,9 +50,9 @@ let Post = (props) => {
           </Link>
         </div>
         <div className="blog-foot-right">
-          <Link className="blog-foot-category">General</Link> <p>/</p>
-          <Link className="blog-foot-comment"><FaComment size="0.8em"/> {post.comments.count}</Link> <p>/</p>
-          <Link className="blog-foot-like"><FaHeart size="0.8em"/> {post.likes}</Link>
+          <Link to="/" className="blog-foot-category">General</Link> <p>/</p>
+          <Link to="/" className="blog-foot-comment"><FaComment size="0.8em"/> {post.comments.count}</Link> <p>/</p>
+          <Link to="/" className="blog-foot-like"><FaHeart size="0.8em"/> {post.likes}</Link>
         </div>
       </div>
     </div>
