@@ -25,14 +25,19 @@ let Post = (props) => {
     <div className="blog-post">
       <div className="blog-header">
         <div className="blog-head-left">
-          <Link to={`/post/${props.post.id}`}>
+          <Link to={`/post/${post.id}`}>
             <h2>{post.title}</h2>
           </Link>
         </div>
         <div className="vert-divider">&nbsp;</div>
         <div className="blog-head-right">
-          <p>By: {post.author}</p>
-          <p>{postTime}</p>
+          <div class="float-left">
+            <p>By: {post.author.name}</p>
+            <p>{postTime}</p>
+          </div>
+          <div className="float-right">
+            <img classname="user-avatar" src={post.author.avatar}></img>
+          </div>
         </div>
       </div>
       <div className="blog-post-body">
@@ -40,14 +45,14 @@ let Post = (props) => {
       </div>
       <div className="blog-post-footer">
         <div className="blog-foot-left">
-          <Link to={`/post/${props.post.id}`}>
+          <Link to={`/post/${post.id}`}>
             <button>Continue Reading</button>
           </Link>
         </div>
         <div className="blog-foot-right">
           <Link className="blog-foot-category">General</Link> <p>/</p>
-          <Link className="blog-foot-comment"><FaComment size="0.8em"/> 0</Link> <p>/</p>
-          <Link className="blog-foot-like"><FaHeart size="0.8em"/> 0</Link>
+          <Link className="blog-foot-comment"><FaComment size="0.8em"/> {post.comments.count}</Link> <p>/</p>
+          <Link className="blog-foot-like"><FaHeart size="0.8em"/> {post.likes}</Link>
         </div>
       </div>
     </div>

@@ -26,7 +26,7 @@ let PostView = (props) => {
     <div className="post-view">
       <div className="post-header">
         <h2>{post.title}</h2>
-        <p>By: {post.author}</p>
+        <p>By: {post.author.name}</p>
         <p>{moment(postTime).format("MMM Do YY")}</p>
         <p>{moment(postTime).fromNow()}</p>
       </div>
