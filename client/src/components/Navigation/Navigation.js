@@ -6,15 +6,12 @@ import {IoMdArrowDropdown} from 'react-icons/io'
 let Navigation = (props) => {
   const [priv, setPriv] = useState(0);
 
-  let checkStatus = () => {
-    if(props.user.loginStatus) {
-      setPriv(props.user.role);
-    }
+  let updateRole = () => {
+    setPriv(props.user.role);
   }
 
   useEffect(() => {
-    console.log(props)
-    checkStatus();
+    updateRole();
   },[props.user.loginStatus]);
 
   return (
@@ -27,38 +24,59 @@ let Navigation = (props) => {
         <div className="nav-links">
           <Link to='/'>
             <div className="nav-item" id="nav-PostsView" onClick={props.handleClick}>
-              <p>Home</p>
+              <p>HOME</p>
+            </div>
+          </Link>
+          <Link to='/create/'>
+            <div className="nav-item" id="nav-PostsView" onClick={props.handleClick}>
+              <p>NEW POST</p>
+            </div>
+          </Link>
+          <Link to='/'>
+            <div className="nav-item" id="nav-PostsView" onClick={props.handleClick}>
+              <p>ABOUT</p>
             </div>
           </Link>
         </div>
       </div>
       {(priv > 2) ?
       <div className="sub-nav">
-        <p className="drophvr">Hello, Admin</p>
-        <div className="dropdown-content">
+        <div className="dropdown">
+          <p>Hello, Administrator <IoMdArrowDropdown/></p>
+          <div className="dropdown-content">
+            <a href="#" onClick={props.logout}>Sign Out</a>
+          </div>
         </div>
       </div>
       :
       (priv > 1) ?
       <div className="sub-nav">
-        <p className="drophvr">Hello, Moderator</p>
-        <div className="dropdown-content">
+        <div className="dropdown">
+          <p>Hello, Moderator <IoMdArrowDropdown/></p>
+          <div className="dropdown-content">
+            <a href="#" onClick={props.logout}>Sign Out</a>
+          </div>
         </div>
       </div>
       :
       (priv > 0) ?
       <div className="sub-nav">
-        <p className="drophvr">Hello, Member</p>
-        <div className="dropdown-content">
+        <div className="dropdown">
+          <p>Hello, Member <IoMdArrowDropdown/></p>
+          <div className="dropdown-content">
+            <a href="#" onClick={props.logout}>Sign Out</a>
+          </div>
         </div>
       </div>
       :
       <div className="sub-nav">
-      <p className="drophvr">Hello, Guest <IoMdArrowDropdown/></p>
-      <div className="dropdown-content">
-        <p>Feel free to <Link to="/auth/login">login</Link> or <Link to="/auth/register">register</Link></p>
+        <div className="dropdown">
+          <p>Hello, Guest <IoMdArrowDropdown/></p>
+          <div className="dropdown-content">
+            <p>Feel free to <Link to="/auth/login">login</Link> or <Link to="/auth/register">register</Link></p>
+          </div>
+        </div>
       </div>
-    </div>
       }
     </div>
   )
