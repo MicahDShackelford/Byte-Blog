@@ -23,10 +23,10 @@ class App extends React.Component {
       posts: [
         {
           title: null,
-          author: { name: null, avatar: null },
+          author: null,
           postedTime: null,
           post: null,
-          comments: { count: null, commentsData: [] }
+          comments: null
         }
       ],
       currentPost: null,
