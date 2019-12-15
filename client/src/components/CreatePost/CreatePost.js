@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import createPost from '../../util/dataFetch/createPost';
 import PostPreview from '../PostPreview/PostPreview';
 import './CreatePost.css';
+import TabIndent from '../../util/tabIndent';
 
 
 let CreatePost = (props) => {
@@ -29,6 +30,9 @@ let CreatePost = (props) => {
       })
     }
   }
+  useEffect(() => {
+    TabIndent('post-body');
+  }, []);
   useEffect(() => {
     if(post.title && post.topic && post.author && post.post) {
       console.log(post)

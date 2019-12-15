@@ -1,11 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import Comments from '../Comments/Comments';
 import moment from 'moment';
-import DOMPurify from 'dompurify';
 import {fetchComments, fetchPost} from '../../util/dataFetch/fetch';
-import marked from 'marked';
-
 import './PostView.css';
+import ParseMarkdown from '../../util/parseMarkdown';
 
 let PostView = (props) => {
   const [post, setPost] = useState({title: "null", author: "null", postedTime: null, post: "null"});
@@ -23,11 +21,15 @@ let PostView = (props) => {
   },[]);
 
   let postTime = post.postedTime || new Date;
-  // let formattedBody = post.post.split('\n') || [];
+
   useEffect(() => {
-    const purifyBody = DOMPurify.sanitize(post.post);
-    const formattedBody = marked(purifyBody);
-    document.getElementById("post-content").innerHTML = formattedBody;
+    // const purifyBody = DOMPurify.sanitize(post.post);
+    // const fixGT = purifyBody.replace(/&gt;+/g, '>');
+    // const formattedBody = marked(fixGT, { breaks: true });
+    ParseMarkdown(post.post)
+      .then((body) => {
+        document.getElementById("post-content-body").innerHTML = body;
+      })
   },[post.post])
 
   return (
@@ -39,13 +41,9 @@ let PostView = (props) => {
         <p>{moment(postTime).fromNow()}</p>
       </div>
       <div className="post-body">
-        <p id="post-content"></p>
-        {/* {formattedBody.map((paragraph, i) => (
-          <div key={`${post.id}-block-${i}`}>
-            <p>{marked(paragraph)}</p>
-            <br />
-          </div>
-        ))} */}
+        <div id="post-content">
+          <pre id="post-content-body"></pre>
+        </div>
         <Comments comments={comments} />
       </div>
     </div>
