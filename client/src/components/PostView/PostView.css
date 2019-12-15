@@ -11,3 +11,11 @@
 .post-view .post-body {
   padding: 0 2em;
 }
+/* Style Markdown */
+.post-view blockquote {
+  background: #EDEDED;
+  margin: 0 1em;
+  padding: 1em;
+  border-left: 5px solid #5BA353;
+  border-radius: 5px;
+}
