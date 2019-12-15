@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import {FaHeart, FaComment} from 'react-icons/fa';
 import {Link} from 'react-router-dom';
@@ -20,13 +20,14 @@ let Post = (props) => {
   let handleClick = (e) => {
     e.preventDefault();
   }
-
-  fetchUser(post.author)
-    .then((res) => {
-      if(res.avatar) {
-        setAvatar(res.avatar);
-      }
-    })
+  useEffect(() =>{
+    fetchUser(post.author)
+      .then((res) => {
+        if(res.avatar) {
+          setAvatar(res.avatar);
+        }
+      })
+  },[])
 
   return (
     <div className="blog-post">
@@ -57,7 +58,7 @@ let Post = (props) => {
           </Link>
         </div>
         <div className="blog-foot-right">
-          <Link to="/" className="blog-foot-category">General</Link> <p>/</p>
+          <Link to="/" className="blog-foot-category">{post.topic}</Link> <p>/</p>
           <Link to="/" className="blog-foot-comment"><FaComment size="0.8em"/> {post.comments}</Link> <p>/</p>
           <Link to="/" className="blog-foot-like"><FaHeart size="0.8em"/> {post.likes}</Link>
         </div>

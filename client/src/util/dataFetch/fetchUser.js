@@ -5,6 +5,8 @@ let fetchUser = (username) => {
         return res.json();
       }).then((res) => {
         resolve(res);
+      }).catch((err) => {
+        // console.log("Error in fetchuser")
       })
   })
 }

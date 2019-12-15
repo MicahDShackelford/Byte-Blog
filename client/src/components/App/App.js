@@ -20,31 +20,17 @@ class App extends React.Component {
     super(props);
     this.state = {
       view: "CreatePost",
-      posts: [
-        {
-          title: null,
-          author: null,
-          postedTime: null,
-          post: null,
-          comments: null
-        }
-      ],
       currentPost: null,
       sessionActive: false,
       loginChecked: false,
-      activeUser: {
-        username: null,
-        role: 0 // 0 - Guest, 1 - Member, 2- Moderator, 3 - Admin
-      }
+      activeUser: { username: null, role: 0 }
     };
-    this.fetchPosts = this.fetchPosts.bind(this);
     this.setLogin = this.setLogin.bind(this);
     this.logout = this.logout.bind(this);
     this.checkLogin = this.checkLogin.bind(this);
   }
   componentDidMount() {
     this.checkLogin();
-    this.fetchPosts();
   }
 
   setLogin(user) {
@@ -91,17 +77,6 @@ class App extends React.Component {
     this.setState({
       loginChecked: true
     });
-  }
-  fetchPosts() {
-    fetch("/posts/retrieve")
-      .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        this.setState({
-          posts: res.reverse()
-        });
-      });
   }
 
   render() {
