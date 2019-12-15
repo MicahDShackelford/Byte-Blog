@@ -4,7 +4,7 @@
   align-items: center;
   height: 80%;
 }
-form {
+#create-post form {
   background: #333;
   width: 60%;
   height: 60%;
@@ -16,30 +16,30 @@ form {
   justify-content: space-between;
   color: #fff;
 }
-.form-group {
+#create-post .form-group {
   display: flex;
   flex-direction: column;
   margin: 0.25em
 }
-.form-group input[type="text"]{
+#create-post .form-group input[type="text"]{
   font-size: 2em;
   border: none;
   border-radius: 5px;
   padding: 0 0.5em;
 }
-.form-group textarea{
+#create-post .form-group textarea{
   border: none;
   border-radius: 5px;
   height: 100%;
 }
-.form-body {
+#create-post .form-body {
   flex: 10;
 }
-.button-group {
+#create-post .button-group {
   display: flex;
   justify-content: center;
 }
-.button-group button {
+#create-post .button-group button {
   flex:1;
   margin: 0 1em;
   margin-top: 1em;
@@ -48,6 +48,6 @@ form {
   background: #5BA353;
   color: #fff;
 }
-.button-group button:hover {
+#create-post .button-group button:hover {
   background: #3f723a;
 }

@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #fff;
 }
 #login-form {
   display: flex;
@@ -12,6 +13,8 @@
   width: 20%;
   height: max-content;
   background: #333;
+  padding: 1em 0.5em;
+  border-radius: 5px;
 }
 #login-form .login-header {
   display: flex;
