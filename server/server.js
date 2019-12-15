@@ -60,6 +60,24 @@ app.post("/post/create", (req,res,next) => {
   });
 })
 
+app.post("/comment/create", (req,res,next) => {
+  Counter.findOne({model: "comment"}, (err, count) => {
+    let comment = new Comment({
+      id: count.count,
+      postId: req.body.postId,
+      author: req.body.author,
+      content: req.body.content
+    })
+    count.count++;
+    count.save();
+    comment.save();
+    res.send({
+      ok: true,
+      message: "Post Success"
+    });
+  });
+})
+
 app.get("/post/retrieve/:postId", (req, res, next) => {
   Post.find({ id: req.params.postId }).then(response => {
     res.send(response);
