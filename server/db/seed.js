@@ -29,36 +29,33 @@ let seedDB = () => {
     let post = new Post({
       id: i,
       title: faker.lorem.words(),
-      author: {
-        name: faker.internet.userName(),
-        avatar: faker.internet.avatar()
-      },
+      author: faker.internet.userName(),
       postedTime: faker.date.past(),
       post: generateParagraph(),
-      likes: faker.random.number(),
-      comments: generateComments()
+      likes: 0,
+      comments: 0
     });
     post.save();
   }
   console.log("[Seed] Your database has been seeded, [Ctrl+C] to close this script");
 }
 
-let generateComments = () => {
-  let numComments = Math.floor(Math.random()* (25 - 1) + 1);
-  let commentArr = [];
-  for(var i = 0; i < numComments; i++) {
-    let comment = {
-      user: faker.internet.userName(),
-      text: faker.lorem.paragraph()
-    }
-    commentArr.push(comment);
-  }
-  let object = {
-    count: numComments,
-    commentsData: commentArr
-  };
-  return object;
-}
+// let generateComments = () => {
+//   let numComments = Math.floor(Math.random()* (25 - 1) + 1);
+//   let commentArr = [];
+//   for(var i = 0; i < numComments; i++) {
+//     let comment = {
+//       user: faker.internet.userName(),
+//       text: faker.lorem.paragraph()
+//     }
+//     commentArr.push(comment);
+//   }
+//   let object = {
+//     count: numComments,
+//     commentsData: commentArr
+//   };
+//   return object;
+// }
 
 let generateParagraph = () => {
   return (faker.lorem.paragraph() +

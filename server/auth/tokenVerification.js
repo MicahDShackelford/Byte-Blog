@@ -30,8 +30,8 @@ const TokenVerify = (req, res, next) => {
               });
             }
           }
-        );
-      }
+          );
+        }
     });
   } else {
     res.send({
