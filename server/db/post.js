@@ -1,15 +1,16 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const postSchema = mongoose.Schema({
-  id: Number,
+  id: {type: Number, require: true},
   title: String,
-  author: Object,
-  postedTime: Date,
+  topic: String,
+  author: String,
   post: String,
-  likes: Number,
-  comments: Object
+  postedTime: { type: Date, default: Date.now },
+  likes: { type: Number, default: 0 },
+  comments: { type: Number, default: 0 }
 });
 
-const Post = mongoose.model('Post', postSchema);
+const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;
