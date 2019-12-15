@@ -5,7 +5,7 @@ const commentSchema = mongoose.Schema({
   postId: Number,
   author: String,
   content: String,
-  postedAt: Date
+  postedAt: {type:Date, default: Date.now }
 });
 
 const Comment = mongoose.model('Comment', commentSchema);
