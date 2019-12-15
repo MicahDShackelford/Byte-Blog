@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import Comments from '../Comments/Comments';
 import moment from 'moment';
+import DOMPurify from 'dompurify';
 import {fetchComments, fetchPost} from '../../util/dataFetch/fetch';
+import marked from 'marked';
 
 import './PostView.css';
 
@@ -21,7 +23,12 @@ let PostView = (props) => {
   },[]);
 
   let postTime = post.postedTime || new Date;
-  let formattedBody = post.post.split('\n') || [];
+  // let formattedBody = post.post.split('\n') || [];
+  useEffect(() => {
+    const purifyBody = DOMPurify.sanitize(post.post);
+    const formattedBody = marked(purifyBody);
+    document.getElementById("post-content").innerHTML = formattedBody;
+  },[post.post])
 
   return (
     <div className="post-view">
@@ -32,12 +39,13 @@ let PostView = (props) => {
         <p>{moment(postTime).fromNow()}</p>
       </div>
       <div className="post-body">
-        {formattedBody.map((paragraph, i) => (
+        <p id="post-content"></p>
+        {/* {formattedBody.map((paragraph, i) => (
           <div key={`${post.id}-block-${i}`}>
-            <p>{paragraph}</p>
+            <p>{marked(paragraph)}</p>
             <br />
           </div>
-        ))}
+        ))} */}
         <Comments comments={comments} />
       </div>
     </div>
