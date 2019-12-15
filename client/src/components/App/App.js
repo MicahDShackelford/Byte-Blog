@@ -124,6 +124,7 @@ class App extends React.Component {
               sessionActive={this.state.sessionActive}
               requiredRole="2"
               component={CreatePost}
+              user={this.state.activeUser}
             />
           </Switch>
         </div>

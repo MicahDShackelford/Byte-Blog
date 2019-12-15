@@ -1,12 +1,13 @@
-const express     = require("express"),
-      jwt         = require("jsonwebtoken"),
-      User        = require("./db/user"),
-      Post        = require("./db/post"),
-      Comment     = require("./db/comments"),
-      Database    = require("./db/database"),
-      Counter     = require("./db/counter"),
-      TokenVerify = require("./auth/tokenVerification"),
-      path        = require("path");
+const express         = require("express"),
+      jwt             = require("jsonwebtoken"),
+      User            = require("./db/user"),
+      Post            = require("./db/post"),
+      Comment         = require("./db/comments"),
+      Database        = require("./db/database"),
+      Counter         = require("./db/counter"),
+      TokenVerify     = require("./auth/tokenVerification"),
+      ProtectedRoute  = require("./auth/protectedRoute"),
+      path            = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -41,7 +42,7 @@ app.get("/posts/retrieve", (req, res, next) => {
   });
 });
 
-app.post("/post/create", TokenVerify, (req,res,next) => {
+app.post("/post/create", ProtectedRoute, (req,res,next) => {
   Counter.findOne({model: "post"}, (err, count) => {
     let post = new Post({
       id: count.count,
@@ -60,7 +61,7 @@ app.post("/post/create", TokenVerify, (req,res,next) => {
   });
 })
 
-app.post("/comment/create", TokenVerify, (req,res,next) => {
+app.post("/comment/create", ProtectedRoute, (req,res,next) => {
   Counter.findOne({model: "comment"}, (err, count) => {
     let comment = new Comment({
       id: count.count,

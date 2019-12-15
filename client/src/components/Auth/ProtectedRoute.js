@@ -46,7 +46,7 @@ const ProtectedRoute = ({
 
   if (verify === "verified") {
     //Of required role & logged in
-    return <CreatePost />;
+    return <CreatePost {...props} />;
   } else if (verify === "forbidden") {
     // Not logged in
     return <Redirect to="/auth/login" />;
