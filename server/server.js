@@ -41,7 +41,7 @@ app.get("/posts/retrieve", (req, res, next) => {
   });
 });
 
-app.post("/post/create", (req,res,next) => {
+app.post("/post/create", TokenVerify, (req,res,next) => {
   Counter.findOne({model: "post"}, (err, count) => {
     let post = new Post({
       id: count.count,
@@ -60,7 +60,7 @@ app.post("/post/create", (req,res,next) => {
   });
 })
 
-app.post("/comment/create", (req,res,next) => {
+app.post("/comment/create", TokenVerify, (req,res,next) => {
   Counter.findOne({model: "comment"}, (err, count) => {
     let comment = new Comment({
       id: count.count,
