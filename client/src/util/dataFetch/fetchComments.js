@@ -4,7 +4,6 @@ const fetchComments = (postId) => {
       .then((res) => {
         return res.json();
       }).then((res) => {
-        console.log(res)
         resolve(res);
       })
   });
