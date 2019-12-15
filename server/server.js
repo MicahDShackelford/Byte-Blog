@@ -45,22 +45,18 @@ app.post("/post/create", (req,res,next) => {
   Counter.findOne({model: "post"}, (err, count) => {
     let post = new Post({
       id: count.count,
-      title: "test",
-      topic: "General",
-      author: "micah",
-      post: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde corporis blanditiis quis cum porro ipsam ea, magnam fugiat quasi totam dolore impedit magni, esse vitae iure deserunt vero, sapiente sequi.
-      Modi deserunt quis odio aut ut. Recusandae ab eius doloremque officiis inventore ullam voluptates ut error laboriosam ea iusto neque repellendus vero a obcaecati praesentium magni tenetur esse, explicabo quae!
-      Magnam amet ipsa nostrum, obcaecati voluptatum totam reiciendis quaerat a porro ea officiis reprehenderit aliquam eum dignissimos doloremque eligendi nemo cupiditate aperiam veniam, consequuntur laboriosam debitis odio accusantium. Voluptatibus, reprehenderit?`
+      title: req.body.title,
+      topic: req.body.topic,
+      author: req.body.author,
+      post: req.body.post
     })
     count.count++;
     count.save();
     post.save();
-  });
-
-
-  res.send({
-    ok: true,
-    message: "Post Success"
+    res.send({
+      ok: true,
+      message: "Post Success"
+    });
   });
 })
 
