@@ -17,8 +17,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 
-app.get("/comments/retrieve/:commentId", (req, res, next) => {
-  Comment.find({postId: req.params.commentId})
+app.get("/comments/retrieve/:postId", (req, res, next) => {
+  Comment.find({postId: req.params.postId})
   .sort({ postedTime: 1 })
   .then(response => {
     res.send(response);
