@@ -1,18 +1,18 @@
-const express         = require("express"),
-      jwt             = require("jsonwebtoken"),
-      User            = require("./db/user"),
-      Post            = require("./db/post"),
-      Comment         = require("./db/comments"),
-      Database        = require("./db/database"),
-      Counter         = require("./db/counter"),
-      TokenVerify     = require("./auth/tokenVerification"),
-      ProtectedRoute  = require("./auth/protectedRoute"),
-      path            = require("path");
+const express         = require("express");
+const jwt             = require("jsonwebtoken");
+const User            = require("./db/user");
+const Post            = require("./db/post");
+const Comment         = require("./db/comments");
+const Database        = require("./db/database");
+const Counter         = require("./db/counter");
+const TokenVerify     = require("./auth/tokenVerification");
+const ProtectedRoute  = require("./auth/protectedRoute");
+const path            = require("path");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 
-app.use(express.static("./client/public"));
+app.use(express.static(path.resolve(__dirname, '../client/public')));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -134,27 +134,34 @@ app.post("/auth/login", (req, res, next) => {
   });
 });
 
-app.get("/create", (req, res, next) => {
-  res.sendFile("index.html", { root: path.join("./client/public") });
-});
+app.get('/', (req, res) => {
+  res.sendFile('index.html', { root: path.resolve(__dirname, '../client/public')});
+}); 
 
-app.get("/post/:postId", (req, res, next) => {
-  res.sendFile("index.html", { root: path.join("./client/public") });
-});
+// Simplify this by using a wildcard
+// app.get("/create", (req, res, next) => {
+//   res.sendFile("index.html", { root: path.join("./client/public") });
+// });
 
-app.get("/auth/login", (req, res, next) => {
-  res.sendFile("index.html", { root: path.join("./client/public") });
-});
+// app.get("/post/:postId", (req, res, next) => {
+//   res.sendFile("index.html", { root: path.join("./client/public") });
+// });
 
-app.get("/auth/test", (req, res, next) => {
-  res.sendFile("index.html", { root: path.join("./client/public") });
-});
+// app.get("/auth/login", (req, res, next) => {
+//   res.sendFile("index.html", { root: path.join("./client/public") });
+// });
 
-app.get("*", (req, res, next) => {
-  res.send(
-    `<html><head><title>404</title><body><h1>404 - Resource not found</h1></body></html>`
-  );
-});
+// app.get("/auth/test", (req, res, next) => {
+//   res.sendFile("index.html", { root: path.join("./client/public") });
+// });
+
+
+// Working on migrating 404 to clientside
+// app.get("*", (req, res, next) => {
+//   res.send(
+//     `<html><head><title>404</title><body><h1>404 - Resource not found</h1></body></html>`
+//   );
+// });
 
 app.post("/auth/tokenVerification", TokenVerify, (req, res, next) => {
   res.end();

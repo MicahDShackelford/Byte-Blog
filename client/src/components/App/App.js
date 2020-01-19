@@ -126,6 +126,9 @@ class App extends React.Component {
               component={CreatePost}
               user={this.state.activeUser}
             />
+            <Route>
+              <h1>404 Route Placeholder</h1>
+            </Route>
           </Switch>
         </div>
       </Router>
